@@ -6,7 +6,8 @@ View a demo GIF [here](https://i.gyazo.com/13240c8ce196a07bc74d76961beee0d6.gif)
 
 ## About the project
 
-I've tried to use the bare minimal of libraries in this project. All the visual animations were handcrafted. There was a huge visual inspiration on Netflix and Disney+, which it's very visible by the color scheme and buttons disposition.
+I've tried to use the bare minimal of libraries in this project.
+All the visual animations were handcrafted. There was a huge visual inspiration on Netflix and Disney+, which it's very visible by the color scheme and buttons disposition.
 
 ### Color palette
 
@@ -16,7 +17,7 @@ I've used the following color palette:
 
 ## Cloning and installing dependencies
 
-To clone the project, just run the following:
+To clone the project, just run the following command:
 
 ```
 git clone https://github.com/heliojuniorkroger/agap2-react-native-challenge
@@ -34,7 +35,8 @@ Or, if you'd rather prefer yarn:
 yarn
 ```
 
-Then, you'll need to install the iOS native dependencies. This process requires [CocoaPods](https://cocoapods.org/) installed in your machine.
+Then, you'll need to install the iOS native dependencies.
+This process requires [CocoaPods](https://cocoapods.org/) installed in your machine.
 Inside the project's `ios` folder, run the following:
 
 ```
