@@ -7,8 +7,7 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint .",
-    "prepare": "husky install"
+    "lint": "eslint ."
   },
   "dependencies": {
     "@react-native-masked-view/masked-view": "^0.2.6",
@@ -27,6 +26,8 @@
     "@babel/core": "^7.16.0",
     "@babel/preset-typescript": "^7.16.0",
     "@babel/runtime": "^7.16.3",
+    "@commitlint/cli": "^15.0.0",
+    "@commitlint/config-conventional": "^15.0.0",
     "@testing-library/react-native": "^8.0.0",
     "@types/jest": "^27.0.3",
     "@types/react": "^17.0.37",
