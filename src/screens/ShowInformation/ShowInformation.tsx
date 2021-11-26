@@ -17,7 +17,7 @@ import {
 import { POWERPUFF_GIRLS_SHOW_ID } from '../../constants';
 import { styles } from './styles';
 import { EpisodeItem } from './components/EpisodeItem/EpisodeItem';
-import { HEADER_HEIGHT, STATUS_BAR_HEIGHT } from './constants';
+import { HEADER_HEIGHT } from './constants';
 import {
   OverlayMenu,
   OverlayMenuItem,
@@ -103,9 +103,12 @@ export const ShowInformation = () => {
     [headerTranslateYAnim],
   );
 
-  const onPressEpisode = useCallback((episode: ShowEpisode) => {
-    navigation.navigate('ShowEpisodeInformation', { episode });
-  }, []);
+  const onPressEpisode = useCallback(
+    (episode: ShowEpisode) => {
+      navigation.navigate('ShowEpisodeInformation', { episode });
+    },
+    [navigation],
+  );
 
   const renderContent = useCallback(() => {
     const episodesFromSelectedSeason = episodes.filter(
@@ -119,7 +122,7 @@ export const ShowInformation = () => {
         onPress={() => onPressEpisode(episode)}
       />
     ));
-  }, [episodes, selectedSeason]);
+  }, [episodes, selectedSeason, onPressEpisode]);
 
   const onSelectSeason = useCallback((season: number) => {
     setSelectedSeason(season);
@@ -129,9 +132,23 @@ export const ShowInformation = () => {
     setShowSeasonsMenu(false);
   }, [setShowSeasonsMenu]);
 
-  if (!showLoaded) {
+  const getHeroContainerDescription = useCallback(() => {
+    if (showInformation) {
+      const { premiered, genres } = showInformation;
+
+      return `${getYearFromPremieredDate(premiered)} — ${separateGenresByComma(
+        genres,
+      )}`;
+    }
+
+    return '';
+  }, [showInformation]);
+
+  if (!showLoaded || !showInformation) {
     return null;
   }
+
+  const { name, image, summary } = showInformation;
 
   return (
     <>
@@ -142,15 +159,9 @@ export const ShowInformation = () => {
             transform: [{ translateY: headerTranslateYAnim }],
           },
         ]}>
-        <View
-          style={{
-            paddingTop: STATUS_BAR_HEIGHT,
-            justifyContent: 'center',
-            alignItems: 'center',
-            height: '100%',
-          }}>
+        <View style={styles.headerContent}>
           <Text style={styles.headerTitle}>
-            {showInformation?.name} - Season {selectedSeason}
+            {name} - Season {selectedSeason}
           </Text>
         </View>
       </Animated.View>
@@ -161,29 +172,16 @@ export const ShowInformation = () => {
         onSelectItem={onSelectSeason}
       />
       <HeroContainer
-        title={showInformation?.name!}
-        imageURI={showInformation?.image.original!}
-        description={`${getYearFromPremieredDate(
-          showInformation?.premiered || '',
-        )} — ${separateGenresByComma(showInformation?.genres || [])}`}
+        title={name}
+        imageURI={image.original}
+        description={getHeroContainerDescription()}
         onScroll={onScroll}>
         <>
-          <View
-            style={{
-              width: '100%',
-              paddingHorizontal: 20,
-              backgroundColor: '#000814',
-              paddingBottom: 20,
-            }}>
+          <View style={styles.heroContent}>
             <Text style={styles.showSummary}>
-              {removeHTMLFromString(showInformation?.summary || '')}
+              {removeHTMLFromString(summary)}
             </Text>
-            <View
-              style={{
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-                marginTop: 20,
-              }}>
+            <View style={styles.heroSeasonSelection}>
               <View style={{ width: '35%' }}>
                 <Button
                   onPress={() => setShowSeasonsMenu(true)}

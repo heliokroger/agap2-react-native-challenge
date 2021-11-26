@@ -5,14 +5,12 @@ import { ShowInformation, ShowEpisodeInformation } from '@screens';
 import type { ShowEpisode } from '@api';
 import { StatusBar } from 'react-native';
 
-export type RootStackParamList = {
-  ShowInformation: undefined;
-  ShowEpisodeInformation: { episode: ShowEpisode };
-};
-
 declare global {
   namespace ReactNavigation {
-    interface RootParamList extends RootStackParamList {}
+    interface RootParamList {
+      ShowInformation: undefined;
+      ShowEpisodeInformation: { episode: ShowEpisode };
+    }
   }
 }
 

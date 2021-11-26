@@ -53,12 +53,6 @@ To run the project on an iOS simulator, just run:
 npm run ios
 ```
 
-Or, if you're using yarn:
-
-```
-yarn ios
-```
-
 ### Android
 
 To run the project on an Android simulator, just run:
@@ -67,24 +61,12 @@ To run the project on an Android simulator, just run:
 npm run android
 ```
 
-Or, if you're using yarn:
-
-```
-yarn android
-```
-
 ## Running tests
 
 To run the unit tests, just run the following command:
 
 ```
 npm test
-```
-
-Or, if you're using yarn:
-
-```
-yarn test
 ```
 
 ## Folder structure

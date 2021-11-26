@@ -25,5 +25,7 @@ module.exports = {
   rules: {
     semi: 'error',
     'react-hooks/exhaustive-deps': 'error',
+    '@typescript-eslint/no-unused-vars': 'error',
+    '@typescript-eslint/no-namespace': 'off',
   },
 };

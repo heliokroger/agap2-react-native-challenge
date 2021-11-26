@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 import { View, Text, Image, Pressable } from 'react-native';
 import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
 import type { ShowEpisode } from '@api';

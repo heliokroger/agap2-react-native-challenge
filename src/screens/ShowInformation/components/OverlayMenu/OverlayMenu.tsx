@@ -63,7 +63,7 @@ export const OverlayMenu = ({
 
   const closeMenu = useCallback(() => {
     performSeasonMenuAnimations([0, 0, 50], onDismiss);
-  }, [performSeasonMenuAnimations]);
+  }, [performSeasonMenuAnimations, onDismiss]);
 
   const onPressItem = useCallback(
     (item: OverlayMenuItem) => {

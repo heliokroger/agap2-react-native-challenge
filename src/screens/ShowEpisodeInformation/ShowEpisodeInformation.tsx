@@ -20,13 +20,12 @@ export const ShowEpisodeInformation = () => {
   const navigation = useNavigation();
   const route = useRoute();
 
-  const openOnTVMaze = useCallback(() => {
-    Linking.openURL(episode.url);
-  }, []);
-
   const { episode } = route.params as { episode: ShowEpisode };
+  const { name, summary, image, season, number, url } = episode;
 
-  const { name, summary, image, season, number } = episode;
+  const openOnTVMaze = useCallback(() => {
+    Linking.openURL(url);
+  }, [url]);
 
   return (
     <>
@@ -37,14 +36,14 @@ export const ShowEpisodeInformation = () => {
         title={name}
         imageURI={image.original}
         description={formatEpisodeDescription(season, number)}>
-        <View style={{ backgroundColor: '#000814', paddingHorizontal: 20 }}>
+        <View style={styles.content}>
           <Text style={styles.episodeSummary}>
             {removeHTMLFromString(summary)}
           </Text>
           <Button
             onPress={openOnTVMaze}
             title="View on TVMaze"
-            style={{ justifyContent: 'center', marginTop: 20 }}
+            style={styles.viewOnTVMazeButton}
           />
         </View>
       </HeroContainer>

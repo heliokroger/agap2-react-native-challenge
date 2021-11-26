@@ -6,4 +6,4 @@ export const STATUS_BAR_HEIGHT = Platform.select({
   android: 0,
 });
 
-export const HEADER_HEIGHT = STATUS_BAR_HEIGHT! + 60;
+export const HEADER_HEIGHT = (STATUS_BAR_HEIGHT ?? 0) + 60;

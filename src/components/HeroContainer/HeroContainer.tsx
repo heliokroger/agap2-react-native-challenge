@@ -40,7 +40,7 @@ export const HeroContainer = ({
         customOnScroll(event);
       }
     },
-    [bannerHeightAnim],
+    [bannerHeightAnim, customOnScroll],
   );
 
   return (
@@ -55,12 +55,7 @@ export const HeroContainer = ({
           position: 'absolute',
         }}
       />
-      <ScrollView
-        style={{
-          backgroundColor: 'transparent',
-        }}
-        scrollEventThrottle={1}
-        onScroll={onScroll}>
+      <ScrollView scrollEventThrottle={1} onScroll={onScroll}>
         <LinearGradient
           colors={['transparent', '#000814']}
           style={styles.bannerLinearGradient}>

@@ -1,6 +1,10 @@
 import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
+  content: {
+    backgroundColor: '#000814',
+    paddingHorizontal: 20,
+  },
   closeButton: {
     position: 'absolute',
     top: 15,
@@ -17,5 +21,9 @@ export const styles = StyleSheet.create({
     color: '#fff',
     fontFamily: 'Nunito-Regular',
     fontSize: 16,
+  },
+  viewOnTVMazeButton: {
+    justifyContent: 'center',
+    marginTop: 20,
   },
 });
