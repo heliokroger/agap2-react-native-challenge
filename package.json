@@ -1,0 +1,48 @@
+{
+  "name": "agap2-challenge",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
+    "start": "react-native start",
+    "test": "jest",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "@react-native-masked-view/masked-view": "^0.2.6",
+    "@react-navigation/native": "^6.0.6",
+    "@react-navigation/native-stack": "^6.2.5",
+    "react": "17.0.2",
+    "react-native": "0.66.3",
+    "react-native-iphone-x-helper": "^1.3.1",
+    "react-native-linear-gradient": "^2.5.6",
+    "react-native-safe-area-context": "^3.3.2",
+    "react-native-screens": "^3.9.0",
+    "react-native-skeleton-placeholder": "^5.0.0",
+    "react-native-vector-icons": "^9.0.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.16.0",
+    "@babel/preset-typescript": "^7.16.0",
+    "@babel/runtime": "^7.16.3",
+    "@testing-library/react-native": "^8.0.0",
+    "@types/jest": "^27.0.3",
+    "@types/react": "^17.0.37",
+    "@types/react-native": "^0.66.6",
+    "@types/react-native-vector-icons": "^6.4.10",
+    "@types/react-test-renderer": "^17.0.1",
+    "@typescript-eslint/eslint-plugin": "^5.4.0",
+    "@typescript-eslint/parser": "^5.4.0",
+    "babel-eslint": "^10.1.0",
+    "babel-plugin-module-resolver": "^4.1.0",
+    "eslint": "^8.3.0",
+    "eslint-plugin-react": "^7.27.1",
+    "eslint-plugin-react-hooks": "^4.3.0",
+    "jest": "^27.3.1",
+    "metro-react-native-babel-preset": "^0.66.2",
+    "react-test-renderer": "^17.0.2",
+    "typescript": "^4.5.2",
+    "typescript-eslint-parser": "^22.0.0"
+  }
+}
