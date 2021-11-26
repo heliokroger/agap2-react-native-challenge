@@ -27,4 +27,9 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     alignSelf: 'center',
   },
+  item: { marginBottom: 20 },
+  itemLabel: {
+    color: '#fff',
+    fontSize: 20,
+  },
 });

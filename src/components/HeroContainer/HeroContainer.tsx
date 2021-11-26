@@ -51,11 +51,12 @@ export const HeroContainer = ({
         source={{
           uri: imageURI,
         }}
-        style={{
-          height: bannerHeightAnim,
-          width: '100%',
-          position: 'absolute',
-        }}
+        style={[
+          styles.banner,
+          {
+            height: bannerHeightAnim,
+          },
+        ]}
       />
       <ScrollView
         testID={scrollViewTestID}

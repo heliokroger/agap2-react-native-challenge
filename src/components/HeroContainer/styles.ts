@@ -7,6 +7,10 @@ export const styles = StyleSheet.create({
     height: '100%',
     backgroundColor: '#000814',
   },
+  banner: {
+    width: '100%',
+    position: 'absolute',
+  },
   bannerLinearGradient: {
     width: '100%',
     height: BANNER_HEIGHT,

@@ -171,10 +171,8 @@ export const ShowInformation = () => {
           source={spinnerAnimation}
           autoPlay
           loop
-          style={{
-            width: 150,
-            height: 150,
-          }}></LottieView>
+          style={styles.loadingAnimation}
+        />
       </Animated.View>
     );
   }, [showLoaded, loadingOverlayOpacityAnim]);

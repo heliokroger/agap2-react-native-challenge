@@ -21,7 +21,7 @@ export const styles = StyleSheet.create({
     height: '100%',
     borderRadius: 2,
     position: 'absolute',
-    zIndex: -1,
+    zIndex: 1,
   },
   episodeName: {
     color: '#fff',

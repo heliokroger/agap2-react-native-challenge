@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { View, Text, Image, Pressable } from 'react-native';
+import React, { useCallback, useRef, useState } from 'react';
+import { View, Text, Pressable, Animated } from 'react-native';
 import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
 import type { ShowEpisode } from '@api';
 import { convertRuntimeToHours, removeHTMLFromString } from '@helpers';
@@ -25,16 +25,26 @@ export const renderImagePlaceholder = (imageLoaded: boolean) => {
 export const EpisodeItem = ({ episode, onPress }: EpisodeItemProps) => {
   const [imageLoaded, setImageLoaded] = useState(false);
 
+  const imageOpacityAnim = useRef(new Animated.Value(0)).current;
+
+  const onLoadImage = useCallback(() => {
+    Animated.timing(imageOpacityAnim, {
+      toValue: 1,
+      duration: 300,
+      useNativeDriver: true,
+    }).start(() => setImageLoaded(true));
+  }, [imageOpacityAnim]);
+
   const { number, name, runtime, summary, image } = episode;
 
   return (
     <Pressable style={styles.episodeButton} onPress={onPress}>
       <View style={styles.episodeImageContainer}>
         {renderImagePlaceholder(imageLoaded)}
-        <Image
+        <Animated.Image
           source={{ uri: image.original }}
-          style={styles.episodeImage}
-          onLoadEnd={() => setImageLoaded(true)}
+          style={[styles.episodeImage, { opacity: imageOpacityAnim }]}
+          onLoadEnd={onLoadImage}
         />
       </View>
       <View style={styles.episodeInformationContainer}>

@@ -16,6 +16,14 @@ export type OverlayMenuProps = {
   onSelectItem: (value: number) => void;
 };
 
+export const getItemFontFamily = (active: boolean) => {
+  if (active) {
+    return 'Nunito-Black';
+  }
+
+  return 'Nunito-Regular';
+};
+
 export const OverlayMenu = ({
   items,
   visible,
@@ -73,6 +81,25 @@ export const OverlayMenu = ({
     [closeMenu, onSelectItem],
   );
 
+  const renderItems = useCallback(() => {
+    return items.map((item, index) => (
+      <Pressable
+        key={`item-${index}`}
+        style={styles.item}
+        onPress={() => onPressItem(item)}>
+        <Text
+          style={[
+            styles.itemLabel,
+            {
+              fontFamily: getItemFontFamily(item.active),
+            },
+          ]}>
+          {item.label}
+        </Text>
+      </Pressable>
+    ));
+  }, [items, onPressItem]);
+
   useEffect(() => {
     if (visible) {
       openMenu();
@@ -101,21 +128,7 @@ export const OverlayMenu = ({
             transform: [{ translateY: seasonsTranslateYAnim }],
           },
         ]}>
-        {items.map((item, index) => (
-          <Pressable
-            key={`item-${index}`}
-            style={{ marginBottom: 20 }}
-            onPress={() => onPressItem(item)}>
-            <Text
-              style={{
-                fontFamily: item.active ? 'Nunito-Black' : 'Nunito-Regular',
-                color: '#fff',
-                fontSize: 20,
-              }}>
-              {item.label}
-            </Text>
-          </Pressable>
-        ))}
+        {renderItems()}
       </Animated.View>
       <Pressable style={styles.closeSeasonsMenuButton} onPress={closeMenu}>
         <Icon name="x" color="#000" size={20} />

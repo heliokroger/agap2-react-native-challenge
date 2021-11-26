@@ -52,4 +52,8 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     zIndex: 1,
   },
+  loadingAnimation: {
+    width: 150,
+    height: 150,
+  },
 });
