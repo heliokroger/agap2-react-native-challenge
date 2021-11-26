@@ -6,7 +6,9 @@ import {
   NativeSyntheticEvent,
   NativeScrollEvent,
 } from 'react-native';
+import LottieView from 'lottie-react-native';
 import { useNavigation } from '@react-navigation/core';
+import spinnerAnimation from '../../assets/animations/spinner.json';
 import { getShowEpisodes, getShowInformation } from '@api';
 import type { Show, ShowEpisode } from '@api';
 import { Button, HeroContainer } from '@components';
@@ -29,6 +31,9 @@ export const getSeasonsFromEpisodes = (episodes: ShowEpisode[]): number[] =>
 
     return [...prev, next.season];
   }, [] as number[]);
+
+export const sleep = (ms: number) =>
+  new Promise(resolve => setTimeout(resolve, ms));
 
 export const getMenuItemsFromSeasons = (
   selectedSeason: number,
@@ -57,6 +62,8 @@ export const ShowInformation = () => {
     new Animated.Value(-HEADER_HEIGHT),
   ).current;
 
+  const loadingOverlayOpacityAnim = useRef(new Animated.Value(1)).current;
+
   const episodeListYPosition = useRef(0);
 
   const navigation = useNavigation();
@@ -68,8 +75,14 @@ export const ShowInformation = () => {
       setEpisodes(response);
     });
 
-    setShowLoaded(true);
-  }, []);
+    await sleep(1000);
+
+    Animated.timing(loadingOverlayOpacityAnim, {
+      toValue: 0,
+      duration: 400,
+      useNativeDriver: true,
+    }).start(() => setShowLoaded(true));
+  }, [loadingOverlayOpacityAnim]);
 
   useEffect(() => {
     getShow();
@@ -107,7 +120,7 @@ export const ShowInformation = () => {
     [navigation],
   );
 
-  const renderContent = useCallback(() => {
+  const renderEpisodes = useCallback(() => {
     const episodesFromSelectedSeason = episodes.filter(
       ({ season }) => season === selectedSeason,
     );
@@ -141,62 +154,107 @@ export const ShowInformation = () => {
     return '';
   }, [showInformation]);
 
-  if (!showLoaded || !showInformation) {
-    return null;
-  }
+  const renderLoading = useCallback(() => {
+    if (showLoaded) {
+      return null;
+    }
 
-  const { name, image, summary } = showInformation;
+    return (
+      <Animated.View
+        style={[
+          styles.loadingOverlay,
+          {
+            opacity: loadingOverlayOpacityAnim,
+          },
+        ]}>
+        <LottieView
+          source={spinnerAnimation}
+          autoPlay
+          loop
+          style={{
+            width: 150,
+            height: 150,
+          }}></LottieView>
+      </Animated.View>
+    );
+  }, [showLoaded, loadingOverlayOpacityAnim]);
+
+  const renderContent = useCallback(() => {
+    if (!showInformation) {
+      return null;
+    }
+
+    const { name, image, summary } = showInformation;
+
+    return (
+      <>
+        <Animated.View
+          style={[
+            styles.header,
+            {
+              transform: [{ translateY: headerTranslateYAnim }],
+            },
+          ]}>
+          <View style={styles.headerContent}>
+            <Text style={styles.headerTitle}>
+              {name} - Season {selectedSeason}
+            </Text>
+          </View>
+        </Animated.View>
+        <OverlayMenu
+          visible={showSeasonsMenu}
+          items={getMenuItemsFromSeasons(selectedSeason, seasons)}
+          onDismiss={onDismissMenu}
+          onSelectItem={onSelectSeason}
+        />
+        <HeroContainer
+          title={name}
+          imageURI={image.original}
+          description={getHeroContainerDescription()}
+          onScroll={onScroll}>
+          <>
+            <View style={styles.heroContent}>
+              <Text style={styles.showSummary}>
+                {removeHTMLFromString(summary)}
+              </Text>
+              <View style={styles.heroSeasonSelection}>
+                <View style={{ width: '35%' }}>
+                  <Button
+                    onPress={() => setShowSeasonsMenu(true)}
+                    iconName="chevron-down"
+                    title={`Season ${selectedSeason}`}
+                  />
+                </View>
+              </View>
+            </View>
+            <View
+              onLayout={({ nativeEvent }) =>
+                (episodeListYPosition.current = nativeEvent.layout.y)
+              }
+              style={styles.episodeList}>
+              {renderEpisodes()}
+            </View>
+          </>
+        </HeroContainer>
+      </>
+    );
+  }, [
+    showInformation,
+    getHeroContainerDescription,
+    headerTranslateYAnim,
+    onDismissMenu,
+    onScroll,
+    onSelectSeason,
+    renderEpisodes,
+    seasons,
+    selectedSeason,
+    showSeasonsMenu,
+  ]);
 
   return (
     <>
-      <Animated.View
-        style={[
-          styles.header,
-          {
-            transform: [{ translateY: headerTranslateYAnim }],
-          },
-        ]}>
-        <View style={styles.headerContent}>
-          <Text style={styles.headerTitle}>
-            {name} - Season {selectedSeason}
-          </Text>
-        </View>
-      </Animated.View>
-      <OverlayMenu
-        visible={showSeasonsMenu}
-        items={getMenuItemsFromSeasons(selectedSeason, seasons)}
-        onDismiss={onDismissMenu}
-        onSelectItem={onSelectSeason}
-      />
-      <HeroContainer
-        title={name}
-        imageURI={image.original}
-        description={getHeroContainerDescription()}
-        onScroll={onScroll}>
-        <>
-          <View style={styles.heroContent}>
-            <Text style={styles.showSummary}>
-              {removeHTMLFromString(summary)}
-            </Text>
-            <View style={styles.heroSeasonSelection}>
-              <View style={{ width: '35%' }}>
-                <Button
-                  onPress={() => setShowSeasonsMenu(true)}
-                  iconName="chevron-down"
-                  title={`Season ${selectedSeason}`}
-                />
-              </View>
-            </View>
-          </View>
-          <View
-            onLayout={({ nativeEvent }) =>
-              (episodeListYPosition.current = nativeEvent.layout.y)
-            }
-            style={styles.episodeList}>
-            {renderContent()}
-          </View>
-        </>
-      </HeroContainer>
+      {renderLoading()}
+      {renderContent()}
     </>
   );
 };

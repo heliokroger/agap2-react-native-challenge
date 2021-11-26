@@ -31,11 +31,8 @@ export const Button = ({
   }, [iconName, iconTestID]);
 
   return (
-    <Pressable
-      testID={testID}
-      style={[styles.menuButton, style]}
-      onPress={onPress}>
-      <Text style={styles.menuButtonLabel}>{title}</Text>
+    <Pressable testID={testID} style={[styles.button, style]} onPress={onPress}>
+      <Text style={styles.buttonLabel}>{title}</Text>
       {renderIcon()}
     </Pressable>
   );

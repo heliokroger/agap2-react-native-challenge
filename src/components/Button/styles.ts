@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
-  menuButton: {
+  button: {
     width: '100%',
     height: 40,
     borderRadius: 20,
@@ -11,7 +11,7 @@ export const styles = StyleSheet.create({
     backgroundColor: '#003566',
     paddingHorizontal: 15,
   },
-  menuButtonLabel: {
+  buttonLabel: {
     fontFamily: 'Nunito-Bold',
     color: '#fff',
     fontSize: 14,
