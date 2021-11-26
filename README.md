@@ -2,7 +2,7 @@
 
 A catalogue of Powerpuff Girls's episodes and seasons written in React Native.
 
-View a demo GIF [here](https://i.gyazo.com/13240c8ce196a07bc74d76961beee0d6.gif).
+View a demo GIF [here](./docs/demo.gif).
 
 ## About the project
 
@@ -13,7 +13,7 @@ All the visual animations were handcrafted. There was a huge visual inspiration 
 
 I've used the following color palette:
 
-![Color palette](https://i.imgur.com/P7vCdn9.png)
+![Color palette](./docs/color-palette.png)
 
 ## Cloning and installing dependencies
 
