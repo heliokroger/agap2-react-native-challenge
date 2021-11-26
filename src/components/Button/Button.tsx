@@ -7,20 +7,34 @@ export type ButtonProps = {
   onPress: () => void;
   title: string;
   iconName?: string;
+  iconTestID?: string;
   style?: StyleProp<ViewStyle>;
+  testID?: string;
 };
 
-export const Button = ({ onPress, style, title, iconName }: ButtonProps) => {
+export const Button = ({
+  testID,
+  iconTestID,
+  onPress,
+  style,
+  title,
+  iconName,
+}: ButtonProps) => {
   const renderIcon = useCallback(() => {
     if (iconName) {
-      return <Icon name={iconName} color="#fff" size={20} />;
+      return (
+        <Icon testID={iconTestID} name={iconName} color="#fff" size={20} />
+      );
     }
 
     return null;
-  }, [iconName]);
+  }, [iconName, iconTestID]);
 
   return (
-    <Pressable style={[styles.menuButton, style]} onPress={onPress}>
+    <Pressable
+      testID={testID}
+      style={[styles.menuButton, style]}
+      onPress={onPress}>
       <Text style={styles.menuButtonLabel}>{title}</Text>
       {renderIcon()}
     </Pressable>

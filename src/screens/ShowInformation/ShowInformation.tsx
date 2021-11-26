@@ -6,23 +6,20 @@ import {
   NativeSyntheticEvent,
   NativeScrollEvent,
 } from 'react-native';
+import { useNavigation } from '@react-navigation/core';
 import { getShowEpisodes, getShowInformation } from '@api';
 import type { Show, ShowEpisode } from '@api';
 import { Button, HeroContainer } from '@components';
+import { POWERPUFF_GIRLS_SHOW_ID } from '@constants';
 import {
   getYearFromPremieredDate,
   separateGenresByComma,
   removeHTMLFromString,
 } from '@helpers';
-import { POWERPUFF_GIRLS_SHOW_ID } from '../../constants';
-import { styles } from './styles';
-import { EpisodeItem } from './components/EpisodeItem/EpisodeItem';
+import { EpisodeItem, OverlayMenu } from './components';
+import type { OverlayMenuItem } from './components';
 import { HEADER_HEIGHT } from './constants';
-import {
-  OverlayMenu,
-  OverlayMenuItem,
-} from './components/OverlayMenu/OverlayMenu';
-import { useNavigation } from '@react-navigation/core';
+import { styles } from './styles';
 
 export const getSeasonsFromEpisodes = (episodes: ShowEpisode[]): number[] =>
   episodes.reduce((prev, next) => {

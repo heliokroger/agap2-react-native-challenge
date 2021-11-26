@@ -12,6 +12,7 @@ module.exports = {
         alias: {
           '@api': './src/api',
           '@components': './src/components',
+          '@constants': './src/constants',
           '@helpers': './src/helpers',
           '@screens': './src/screens',
         },

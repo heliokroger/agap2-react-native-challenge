@@ -11,9 +11,14 @@ export const styles = StyleSheet.create({
     flexShrink: 1,
     marginLeft: 15,
   },
-  episodeImage: {
+  episodeImageContainer: {
     width: 100,
     height: 100,
+    position: 'relative',
+  },
+  episodeImage: {
+    width: '100%',
+    height: '100%',
     borderRadius: 2,
     position: 'absolute',
     zIndex: -1,

@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`testing Button component should match snapshot 1`] = `
+<View
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Array [
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#003566",
+        "borderRadius": 20,
+        "flexDirection": "row",
+        "height": 40,
+        "justifyContent": "space-between",
+        "paddingHorizontal": 15,
+        "width": "100%",
+      },
+      undefined,
+    ]
+  }
+  testID="button-test-id"
+>
+  <Text
+    style={
+      Object {
+        "color": "#fff",
+        "fontFamily": "Nunito-Bold",
+        "fontSize": 14,
+      }
+    }
+  >
+    Button
+  </Text>
+</View>
+`;

@@ -29,7 +29,7 @@ export const EpisodeItem = ({ episode, onPress }: EpisodeItemProps) => {
 
   return (
     <Pressable style={styles.episodeButton} onPress={onPress}>
-      <View style={{ width: 100, height: 100, position: 'relative' }}>
+      <View style={styles.episodeImageContainer}>
         {renderImagePlaceholder(imageLoaded)}
         <Image
           source={{ uri: image.original }}

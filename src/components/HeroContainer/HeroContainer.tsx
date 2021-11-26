@@ -16,6 +16,7 @@ export type HeroContainerProps = {
   description: string;
   imageURI: string;
   children: React.ReactChild;
+  scrollViewTestID?: string;
   onScroll?: (event: NativeSyntheticEvent<NativeScrollEvent>) => void;
 };
 
@@ -24,6 +25,7 @@ export const HeroContainer = ({
   description,
   imageURI,
   children,
+  scrollViewTestID,
   onScroll: customOnScroll,
 }: HeroContainerProps) => {
   const bannerHeightAnim = useRef(new Animated.Value(BANNER_HEIGHT)).current;
@@ -55,7 +57,10 @@ export const HeroContainer = ({
           position: 'absolute',
         }}
       />
-      <ScrollView scrollEventThrottle={1} onScroll={onScroll}>
+      <ScrollView
+        testID={scrollViewTestID}
+        scrollEventThrottle={1}
+        onScroll={onScroll}>
         <LinearGradient
           colors={['transparent', '#000814']}
           style={styles.bannerLinearGradient}>
