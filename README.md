@@ -4,6 +4,8 @@ A catalogue of Powerpuff Girls's episodes and seasons written in React Native.
 
 View a demo GIF [here](./docs/demo.gif).
 
+Download a demo APK [here](https://github.com/heliojuniorkroger/agap2-react-native-challenge/releases).
+
 ## About the project
 
 I've tried to use the bare minimal of libraries in this project.
