@@ -2,7 +2,7 @@
 
 A catalogue of Powerpuff Girls's episodes and seasons written in React Native.
 
-![iOS](https://i.gyazo.com/13240c8ce196a07bc74d76961beee0d6.gif)
+View a demo GIF [here](https://i.gyazo.com/13240c8ce196a07bc74d76961beee0d6.gif).
 
 ## About the project
 
