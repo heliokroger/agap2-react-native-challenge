@@ -2,7 +2,7 @@
 
 A catalogue of Powerpuff Girls's episodes and seasons written in React Native.
 
-![iOS](https://i.gyazo.com/13240c8ce196a07bc74d76961beee0d6.gif=x250) | ![Android](https://i.gyazo.com/f2dcbc078ed024f728562bf19050d5b2.gif=x250)
+![iOS](https://i.gyazo.com/13240c8ce196a07bc74d76961beee0d6.gif)
 
 ## About the project
 
@@ -34,7 +34,7 @@ Or, if you'd rather prefer yarn:
 yarn
 ```
 
-Then, you'll need to install the iOS native dependencies. This process requires (https://cocoapods.org/)[CocoaPods] installed in your machine.
+Then, you'll need to install the iOS native dependencies. This process requires [CocoaPods](https://cocoapods.org/) installed in your machine.
 Inside the project's `ios` folder, run the following:
 
 ```
