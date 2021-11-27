@@ -6,9 +6,7 @@ import {
   NativeSyntheticEvent,
   NativeScrollEvent,
 } from 'react-native';
-import LottieView from 'lottie-react-native';
 import { useNavigation } from '@react-navigation/core';
-import spinnerAnimation from '../../assets/animations/spinner.json';
 import { getShowEpisodes, getShowInformation } from '@api';
 import type { Show, ShowEpisode } from '@api';
 import { Button, HeroContainer } from '@components';
@@ -18,7 +16,7 @@ import {
   separateGenresByComma,
   removeHTMLFromString,
 } from '@helpers';
-import { EpisodeItem, OverlayMenu } from './components';
+import { EpisodeItem, LoadingOverlay, OverlayMenu } from './components';
 import type { OverlayMenuItem } from './components';
 import { HEADER_HEIGHT } from './constants';
 import { styles } from './styles';
@@ -31,9 +29,6 @@ export const getSeasonsFromEpisodes = (episodes: ShowEpisode[]): number[] =>
 
     return [...prev, next.season];
   }, [] as number[]);
-
-export const sleep = (ms: number) =>
-  new Promise(resolve => setTimeout(resolve, ms));
 
 export const getMenuItemsFromSeasons = (
   selectedSeason: number,
@@ -62,8 +57,6 @@ export const ShowInformation = () => {
     new Animated.Value(-HEADER_HEIGHT),
   ).current;
 
-  const loadingOverlayOpacityAnim = useRef(new Animated.Value(1)).current;
-
   const episodeListYPosition = useRef(0);
 
   const navigation = useNavigation();
@@ -75,14 +68,8 @@ export const ShowInformation = () => {
       setEpisodes(response);
     });
 
-    await sleep(1000);
-
-    Animated.timing(loadingOverlayOpacityAnim, {
-      toValue: 0,
-      duration: 400,
-      useNativeDriver: true,
-    }).start(() => setShowLoaded(true));
-  }, [loadingOverlayOpacityAnim]);
+    setShowLoaded(true);
+  }, []);
 
   useEffect(() => {
     getShow();
@@ -153,29 +140,6 @@ export const ShowInformation = () => {
 
     return '';
   }, [showInformation]);
-
-  const renderLoading = useCallback(() => {
-    if (showLoaded) {
-      return null;
-    }
-
-    return (
-      <Animated.View
-        style={[
-          styles.loadingOverlay,
-          {
-            opacity: loadingOverlayOpacityAnim,
-          },
-        ]}>
-        <LottieView
-          source={spinnerAnimation}
-          autoPlay
-          loop
-          style={styles.loadingAnimation}
-        />
-      </Animated.View>
-    );
-  }, [showLoaded, loadingOverlayOpacityAnim]);
 
   const renderContent = useCallback(() => {
     if (!showInformation) {
@@ -251,7 +215,7 @@ export const ShowInformation = () => {
 
   return (
     <>
-      {renderLoading()}
+      <LoadingOverlay loaded={showLoaded} />
       {renderContent()}
     </>
   );

@@ -43,17 +43,4 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginTop: 20,
   },
-  loadingOverlay: {
-    width: '100%',
-    height: '100%',
-    position: 'absolute',
-    backgroundColor: '#000814',
-    justifyContent: 'center',
-    alignItems: 'center',
-    zIndex: 1,
-  },
-  loadingAnimation: {
-    width: 150,
-    height: 150,
-  },
 });
