@@ -9,7 +9,7 @@ Download a demo APK [here](https://github.com/heliojuniorkroger/agap2-react-nati
 ## About the project
 
 I've tried to use the bare minimal of libraries in this project.
-All the visual animations were handcrafted. There was a huge visual inspiration on Netflix and Disney+, which it's very visible by the color scheme and buttons disposition.
+All the visual animations were handcrafted. There was a huge visual inspiration on Netflix and Disney+, which is made clear by the color scheme and buttons disposition.
 
 ### Color palette
 
@@ -84,7 +84,7 @@ The application is distributed in four main parts:
 
 ### API
 
-The `api` folder contains a small bootstrap to be used for every API call. Also, there's a method for every request, with allows to get the response from the endpoint already knowing its return type.
+The `api` folder contains a small bootstrap to be used for every API call. Also, there's a method for every request, which allows to get the response from the endpoint already knowing its return type.
 
 For instance:
 
